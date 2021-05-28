@@ -2,6 +2,7 @@ import React from 'react'
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import * as SiIcons from "react-icons/si";
+import * as CgIcons from "react-icons/cg";
 
 
 export const SidebarData = [
@@ -21,6 +22,12 @@ export const SidebarData = [
         title: 'Assignments',
         path: '/Assignments',
         icon: <IoIcons.IoIosPaper/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Join a Class',
+        path: '/Joinclass',
+        icon: <CgIcons.CgEnter/>,
         cName: 'nav-text'
     }
 ]
