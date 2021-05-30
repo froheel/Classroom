@@ -5,13 +5,20 @@ function Createclass() {
 
     const [className, setClassName] = useState("");
     const [testPass, setPass] = useState(false);
-    const submitData = () => {
-        console.log(className);
+    const submitData = (e) => {
+        setClassName(e.target.value);
     }
     const createCode = () =>{
         //server side code generation
         return "random class code";
     }
+
+    const submitClassName = () =>{
+      setPass(true);
+      console.log(className);
+      //backend data send
+    }
+
     return (
       <div className="mx-3 my-5 main">
         <Row className="h-100">
@@ -19,23 +26,18 @@ function Createclass() {
           <Col className="my-auto">
             <Card>
               <Card.Body>
-                <Form onSubmit={(e) => {
-                    e.preventDefault();
-                    submitData();
-                }}>
+                <Form>
                   <Form.Group controlId="classname">
                     <Form.Label>Create a Class</Form.Label>
                     <br></br>
-                    <Form.Control type="text" placeholder="Class Name"/>
+                    <Form.Control value={className} type="text" placeholder="Class Name" onChange={ e => submitData(e)}/>
                     <br></br>
-                    <Button>Create Class</Button>
+                    <Button onClick={submitClassName}>Create Class</Button>
                   </Form.Group>
                 </Form>
-                {testPass ? 
-                <p className='text-success'>Class Created<br></br> Class Code: {createCode()}</p>
-                :
-                <p className='text-fail'><br></br>Failed to Create Class</p>
-                }
+                {testPass &&
+                <p className='text-success'>Class Created<br></br> Class Code: {createCode()}</p>}
+                
               </Card.Body>
             </Card>
           </Col>
