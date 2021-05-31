@@ -14,7 +14,7 @@ const Home = () => {
         <>
         <Sidebar isOpen = {isOpen} toggle={toggle}></Sidebar>
         <Navbar toggle={toggle}></Navbar>
-        <HeroSection/>
+        <HeroSection></HeroSection>
         </>
     )
 }
