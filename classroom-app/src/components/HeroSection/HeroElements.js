@@ -11,7 +11,6 @@ height: 800px;
 position: relative;
 z-index: 1;
 `
-/** Add: before styles */
 
 export const HeroBg = styled.div`
 position: absolute;
@@ -38,7 +37,7 @@ z-index: 3;
 max-width: 1200px;
 position: absolute;
 padding: 8px 24px;
-margin-top: 10px;
+margin-top: 2px;
 margin-left: 15%;
 margin-right: 15%;
 display: flex;
