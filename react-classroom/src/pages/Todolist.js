@@ -1,6 +1,8 @@
 import { Navbar, Nav, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import Assigned from "../components/assigned.js";
+import Missing from "../components/missing.js";
+import Done from "../components/done.js";
 
 function Todolist() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,8 +40,8 @@ function Todolist() {
           <Col>
             <div className="text-center">
               {currentPage === 1 && <Assigned />}
-              {currentPage === 2 && <>Missing</>}
-              {currentPage === 3 && <>Done</>}
+              {currentPage === 2 && <Missing />}
+              {currentPage === 3 && <Done />}
             </div>
           </Col>
         </Row>
