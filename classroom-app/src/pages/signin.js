@@ -1,10 +1,12 @@
-import React from 'react'
-import Navbar from '../components/Navbar';
-export const SignInPage = () => {
-    return (
+import React from 'react';
+import SignIn from '../components/Signin';
 
-        <Navbar>
-        </Navbar>
+export const SignInPage = () => {
+
+    return (
+        <>
+        <SignIn></SignIn>
+        </>
     )
 }
 export default SignInPage;
