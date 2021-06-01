@@ -31,16 +31,24 @@ const Navbar = ({toggle}) => {
                 </MobileIcon>
                 <NavMenu>
                     <NavItem>
-                        <NavLinks to="about">About</NavLinks>
+                        <NavLinks to="about"
+                        smooth = {true} duration={500} spy={true} exact = 'true'
+                        >About</NavLinks>
                     </NavItem>
                     <NavItem>
-                        <NavLinks to="discover">Discover</NavLinks>
+                        <NavLinks to="discover"
+                         smooth = {true} duration={500} spy={true} exact = 'true'
+                        >Discover</NavLinks>
                     </NavItem>
                     <NavItem>
-                        <NavLinks to="services">Services</NavLinks>
+                        <NavLinks to="services"
+                         smooth = {true} duration={500} spy={true} exact = 'true'
+                        >Services</NavLinks>
                     </NavItem>
                     <NavItem>
-                        <NavLinks to="signup">Sign Up</NavLinks>
+                        <NavLinks to="signup"
+                         smooth = {true} duration={500} spy={true} exact = 'true'
+                        >Sign Up</NavLinks>
                     </NavItem>
                 </NavMenu>
                 <NavBtn>
