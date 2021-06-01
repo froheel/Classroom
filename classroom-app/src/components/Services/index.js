@@ -1,7 +1,7 @@
 import React from 'react'
-import Icon1 from '../../images/svg-1.svg'
-import Icon2 from '../../images/svg-2.svg'
-import Icon3 from '../../images/svg-3.svg'
+import Icon1 from '../../images/svg-5.svg'
+import Icon2 from '../../images/svg-6.svg'
+import Icon3 from '../../images/svg-7.svg'
 import {
     ServicesContainer,
     ServicesH1,
@@ -19,18 +19,18 @@ const Services = () => {
             <ServicesWrapper>
                 <ServicesCard>
                     <ServicesIcon src={Icon1} />
-                    <ServicesH2>Reduce expenses</ServicesH2>
-                    <ServicesP> We help reduce your fees and increase your overall revenue</ServicesP>
+                    <ServicesH2>Learning Material</ServicesH2>
+                    <ServicesP> We help explain difficult concepts and increase your overall understanding.</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
                     <ServicesIcon src={Icon2} />
-                    <ServicesH2>Virtual offices</ServicesH2>
-                    <ServicesP>Access anywhere</ServicesP>
+                    <ServicesH2>Track your progress</ServicesH2>
+                    <ServicesP>Make use of our latest features to help you stay updated with the latest content and track your progress.</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
                     <ServicesIcon src={Icon3} />
-                    <ServicesH2>Unlock our membership</ServicesH2>
-                    <ServicesP> 5% cash back</ServicesP>
+                    <ServicesH2>Collaborate</ServicesH2>
+                    <ServicesP>Build your network and meet like minded students who you can work with to polish your skills.</ServicesP>
                 </ServicesCard>
             </ServicesWrapper>
 
