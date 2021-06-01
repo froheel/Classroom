@@ -11,7 +11,7 @@ const SignIn = () => {
                 <FormWrap>
                     <Icon to="/">Classroom</Icon>
                     <FormContent>
-                        <Form action="#">
+                        <Form action="/classes">
                             <FormH1> Sign in to your account</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput type ='email' required/>
