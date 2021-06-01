@@ -4,18 +4,32 @@ import Home from './pages';
 import SignInPage from './pages/signin';
 import SignUpPage from './pages/signup';
 import ClassesPage from './pages/classes';
+import Joinclass from "./pages/Joinclass";
+import Todolist from "./pages/Todolist";
+import Createclass from "./pages/Createclass";
+import Sidebar from "./components/Sidebar/Sidebar";
+import InClass from "./husnain_components/InClass";
+
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path = "/signin" component={SignInPage} exact/>
-        <Route path = "/signup" component = {SignUpPage} exact/>
-        <Route path= "/classes" component ={ClassesPage} exact/>
-      </Switch>
-    </Router>
-  );
+    return (
+        <Router>
+            <Sidebar/>
+            <Switch>
+                <Route path="/" component={Home} exact/>
+                <Route path="/signin" component={SignInPage} exact/>
+                <Route path="/signup" component={SignUpPage} exact/>
+                <Route path="/classes" component={ClassesPage} exact/>
+                <Route path="/inclass" component={InClass} exact/>
+                {/*todo Husnain*/}
+                {/*<Route path='/Assignment' exact component={Assignments}/>*/}
+                <Route path='/Joinclass' exact component={Joinclass}/>
+                <Route path='/Todolist' exact component={Todolist}/>
+                <Route path='/Createclass' exact component={Createclass}/>
+
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;

@@ -18,7 +18,7 @@ const Services = () => {
         <ServicesContainer>
             <ServicesWrapper>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon3} />
                     </Link>
                     <ServicesH2>Information Retrieval</ServicesH2>
