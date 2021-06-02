@@ -30,7 +30,7 @@ headline, darkText, description , buttonLabel, img, alt, primary, dark, dark2}) 
                              <Button1 className="button"style={{
                                 borderRadius: 40,
                                 backgroundColor: "#01bf71",
-                                padding: "10px 20px 10px",
+                                padding: "10px 20px 10px 5px",
                                 margin: "5px 5px 5px 5px",
                                 fontSize: "15px",
                                  }}component={Link} to="/signup">Sign Up</Button1>
