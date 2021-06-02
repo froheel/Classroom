@@ -25,14 +25,14 @@ const Services = () => {
                     <ServicesP>Noshaba Nasir</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon1} />
                     </Link>
                     <ServicesH2>Data Science</ServicesH2>
                     <ServicesP>Maryam Bashir</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon2} />
                     </Link>
                     <ServicesH2>Machine Learning</ServicesH2>
@@ -41,21 +41,21 @@ const Services = () => {
             </ServicesWrapper>
              <ServicesWrapper>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon1} />
                     </Link>
                     <ServicesH2>Artificial Intelligence</ServicesH2>
                     <ServicesP>Aamir Wali</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon2} />
                     </Link>
-                    <ServicesH2>Complier</ServicesH2>
+                    <ServicesH2>Programming</ServicesH2>
                     <ServicesP>Hira Asif</ServicesP>
                 </ServicesCard>
                 <ServicesCard>
-                    <Link to ='/'>
+                    <Link to ='/inclass'>
                         <ServicesIcon src={Icon3} />
                     </Link>
                     <ServicesH2>Cloud</ServicesH2>

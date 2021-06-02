@@ -34,7 +34,7 @@ class InClass extends Component {
                             <Button variant="secondary" onClick={this.three}>People</Button>
                         </ButtonGroup>
                     </div>
-                    {this.state.page===1?<Stream classname="AP_7B" description="This is Ap class"/>:""}
+                    {this.state.page===1?<Stream classname="Programming" description="This is AP 8B Class."/>:""}
                     {this.state.page===2?<Classwork/>:""}
                     {this.state.page===3?<People/>:""}
 
