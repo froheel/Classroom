@@ -1,5 +1,6 @@
 import { Form, Card, Row, Col} from 'react-bootstrap'
 import {useState} from 'react';
+import Navbar from '../components/Sidebar_Inside/Sidebar';
 
 function Joinclass() {
 
@@ -12,6 +13,8 @@ function Joinclass() {
         }
     }
     return (
+      <>
+      <Navbar/>
       <div className="mx-3 my-5 main">
         <Row className="h-100">
           <Col></Col>
@@ -48,6 +51,7 @@ function Joinclass() {
           <Col></Col>
         </Row>
       </div>
+      </>
     );
 }
 

@@ -3,6 +3,7 @@ import {Button, ButtonGroup} from "react-bootstrap";
 import Stream from "./Stream";
 import People from "./People";
 import Classwork from "./Classwork";
+import Navbar from "../../src/components/Sidebar_Inside/Sidebar";
 
 class InClass extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ class InClass extends Component {
 
     render() {
         return (
+            <>
+            <Navbar/>
             <div style={{marginTop: 10}}>
                 <div className={"container"}>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -37,6 +40,7 @@ class InClass extends Component {
 
                 </div>
             </div>
+            </>
         );
     }
 }

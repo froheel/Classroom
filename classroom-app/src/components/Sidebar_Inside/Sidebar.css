@@ -54,6 +54,7 @@
 
 .nav-text a:hover {
   background-color: #5cb85c;
+  text-decoration: none;
   color: white;
 }
 

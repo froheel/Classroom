@@ -79,8 +79,17 @@ padding: 0 1rem;
 height: 100%;
 cursor: pointer;
 
+&.hover{
+ border-bottom:3px solid #01bf71 ;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none
+}
 &.active{
     border-bottom:3px solid #01bf71 ;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none
 }
 
 `;
@@ -107,8 +116,8 @@ text-decoration: none;
 
 &:hover{
     transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
+    background: #010606;
+    color: #fff;
 }
 
 `

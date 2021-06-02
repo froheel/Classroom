@@ -44,7 +44,7 @@ justify-content: center;
 
 export const Icon = styled(Link)`
 padding-left: 32px;
-padding-top: 20px;
+padding-top: 40px;
 padding-bottom:20px ;
 text-decoration: none;
 color: #fff;
@@ -65,7 +65,7 @@ height: 100%;
 display: flex;
 flex-direction: column;
 justify-content: center;
-
+margin-top:-5%;
 @media screen and (max-width: 400px){
     padding: 10px;
 }

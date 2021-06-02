@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text,VideoBg } from './SigninElements'
 import Video from '../../videos/video-1.mp4';
+import '../InfoSection/Button.css';
 
 const SignIn = () => {
     return (
@@ -9,7 +10,7 @@ const SignIn = () => {
             </VideoBg>
             <Container>
                 <FormWrap>
-                    <Icon to="/">Classroom</Icon>
+                    <Icon to="/" className="button" style={{ textDecoration: 'none'}}>Classroom</Icon>
                     <FormContent>
                         <Form action="/classes">
                             <FormH1> Sign in to your account</FormH1>
