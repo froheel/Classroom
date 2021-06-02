@@ -11,7 +11,7 @@ function Createclass() {
     }
     const createCode = () =>{
         //server side code generation
-        return "random class code";
+        return "Xy25372572";
     }
 
     const submitClassName = () =>{

@@ -41,7 +41,7 @@ function Joinclass() {
                 {testPass ? 
                 <p className='text-success'>
                    
-                    test pass
+                    Class successfully joined
                 </p>
                 : null
                 }
