@@ -40,7 +40,7 @@ class ClassworkCard extends Component {
                                 <li>File 3</li>
                             </ul>
                             <div>
-                                <Link><Button style={{width:"100%"}} >View More</Button></Link>
+                                <Link to="/assignment"><Button style={{width:"100%"}} >View More</Button></Link>
                             </div>
                         </div>
                     </Collapse>
