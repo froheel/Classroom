@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Card} from "react-bootstrap";
 import {AiOutlineFile, BsFile} from "react-icons/all";
 import StreamComment from "../husnain_components/StreamComment";
+import Navbar from '../components/Sidebar_Inside/Sidebar';
 
 class Assignment extends Component {
     constructor(props) {
@@ -10,15 +11,17 @@ class Assignment extends Component {
             date: new Date().toLocaleTimeString(),
             totalPoints: 100,
             gainedPoints: 100,
-            name: "Graded Class Activity-2(State transition Testing)",
+            name: "Assignment 1: Graded Class Activity-2(State transition Testing)",
             submitted: true,
             fileName: "A1_AP.pdf",
-            description:"This is Final"
+            description:"File1, File2, File3 attached"
         }
     }
 
     render() {
         return (
+            <>
+            <Navbar/>
             <div style={{marginTop: "50px"}} className={"container"}>
                 <div className={"row"}>
                     <div className={"col-lg-9"}>
@@ -37,7 +40,7 @@ class Assignment extends Component {
                         </div>
                         <div className={"block-example border-top border-dark"} style={{marginTop:"15px"}}></div>
                         <div style={{marginTop:50}}>
-                            <StreamComment name={"Farhan"} comment={"Its still not uploaded"}/>
+                            <StreamComment name={"Mujtaba Malik"} comment={"What will we do in Q2?"}/>
                             <div className={"block-example border-top border-dark"}></div>
                         </div>
                     </div>
@@ -51,8 +54,8 @@ class Assignment extends Component {
                                         <AiOutlineFile fontSize="30px"/>   {this.state.fileName}
                                     </Card.Body>
                                 </Card>
-                                <Button style={{width: "100%", marginTop: "10px"}}
-                                        variant="outline-success">{this.state.submitted ? "Unsubmit" : "submit"}</Button>
+                                <Button style={{width: "100%", marginTop: "10px",backgroundColor:' #5cb85c', color:'white'}}
+                                        variant="outline-success">{this.state.submitted ? "Submitted" : "submit"}</Button>
                             </Card.Body>
                         </Card>
 
@@ -60,6 +63,7 @@ class Assignment extends Component {
 
                 </div>
             </div>
+            </>
         );
     }
 }

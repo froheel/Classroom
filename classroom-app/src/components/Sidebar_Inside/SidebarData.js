@@ -11,7 +11,14 @@ import * as GiIcons from "react-icons/gi";
         path: '/',
         icon: <AiIcons.AiFillHome/>,
         cName: 'nav-text'
-    }, */}
+    },
+    {
+        title: 'Assignments',
+        path: '/assignment',
+        icon: <IoIcons.IoIosPaper/>,
+        cName: 'nav-text'
+    },
+*/}
 
 export const SidebarData = [
     
@@ -21,12 +28,7 @@ export const SidebarData = [
         icon: <SiIcons.SiGoogleclassroom/>,
         cName: 'nav-text'
     },
-    {
-        title: 'Assignments',
-        path: '/Assignments',
-        icon: <IoIcons.IoIosPaper/>,
-        cName: 'nav-text'
-    },
+    
     {
         title: 'Join a Class',
         path: '/Joinclass',
