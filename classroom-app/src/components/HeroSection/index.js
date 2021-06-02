@@ -33,6 +33,7 @@ const HeroSection = () => {
                         onMouseLeave = {onHover}
                         primary = 'false'
                         dark = 'true'
+                        style={{ textDecoration: 'none'}}
                          >
                             Get Started  {hover ? <ArrowForward /> : <ArrowRight/>}
                         </Button>

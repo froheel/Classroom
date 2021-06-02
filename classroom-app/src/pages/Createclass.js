@@ -1,5 +1,6 @@
 import { Form, Card, Row, Col, Button} from 'react-bootstrap'
 import {useState} from 'react';
+import Navbar from '../components/Sidebar_Inside/Sidebar';
 
 function Createclass() {
 
@@ -10,7 +11,7 @@ function Createclass() {
     }
     const createCode = () =>{
         //server side code generation
-        return "random class code";
+        return "Xy25372572";
     }
 
     const submitClassName = () =>{
@@ -20,6 +21,8 @@ function Createclass() {
     }
 
     return (
+      <>
+      <Navbar/>
       <div className="mx-3 my-5 main">
         <Row className="h-100">
           <Col></Col>
@@ -44,6 +47,7 @@ function Createclass() {
           <Col></Col>
         </Row>
       </div>
+      </>
     );
 }
 

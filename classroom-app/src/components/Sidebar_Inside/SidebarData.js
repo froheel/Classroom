@@ -6,14 +6,15 @@ import * as CgIcons from "react-icons/cg";
 import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 
-
-export const SidebarData = [
-    {
+{/*/ {
         title: 'Home',
         path: '/',
         icon: <AiIcons.AiFillHome/>,
         cName: 'nav-text'
-    },
+    }, */}
+
+export const SidebarData = [
+    
     {
         title: 'Classes',
         path: '/Classes',
@@ -42,6 +43,12 @@ export const SidebarData = [
         title: 'Create a class',
         path: '/Createclass',
         icon: <GiIcons.GiBookshelf/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Logout',
+        path: '/',
+        icon: <AiIcons.AiFillHome/>,
         cName: 'nav-text'
     }
 ]

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import Button1 from '@material-ui/core/Button';
-
+import '../InfoSection/Button.css';
 import { 
     InfoContainer,
     InfoWrapper,
@@ -27,12 +27,12 @@ headline, darkText, description , buttonLabel, img, alt, primary, dark, dark2}) 
                              <TopLine> {topLine} </TopLine>
                              <Heading lightText={lightText}> {headline}</Heading>
                              <Subtitle darkText = {darkText}>{description} </Subtitle>
-                             <Button1 style={{
+                             <Button1 className="button"style={{
                                 borderRadius: 40,
                                 backgroundColor: "#01bf71",
                                 padding: "10px 20px 10px",
                                 margin: "5px 5px 5px 5px",
-                                fontSize: "15px"
+                                fontSize: "15px",
                                  }}component={Link} to="/signup">Sign Up</Button1>
                              {/*<BtnWrap>
                                  <Button to="home"

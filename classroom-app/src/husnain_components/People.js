@@ -11,24 +11,26 @@ class People extends Component {
                 <div>
                     <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Muhammad Husnain" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Muhammad Adan" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Muhammad Farhan" bio={"Nothing in BIO"}/>
                 </div>
                 <div className={"block-example border-bottom border-dark" } style={{marginTop:20,marginBottom:30}}>
                     <h1 className={"text-primary"}>Students</h1>
                 </div>
                 <div>
 
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Ather Fawaz" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Mujtaba Malik" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Hafsa Saleem" bio={"Nothing in BIO"}/>
                     <div className={"block-example border-top border-dark"}></div>
-                    <PeopleCard name="Feza Roheel" bio={"Nothing in BIO"}/>
+                    <PeopleCard name="Hamza Jawad" bio={"Nothing in BIO"}/>
+                     <div className={"block-example border-top border-dark"}></div>
+                    <PeopleCard name="Wasiq Malik" bio={"Nothing in BIO"}/>
                 </div>
             </div>
         );

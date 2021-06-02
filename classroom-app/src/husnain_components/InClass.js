@@ -3,6 +3,7 @@ import {Button, ButtonGroup} from "react-bootstrap";
 import Stream from "./Stream";
 import People from "./People";
 import Classwork from "./Classwork";
+import Navbar from "../../src/components/Sidebar_Inside/Sidebar";
 
 class InClass extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ class InClass extends Component {
 
     render() {
         return (
+            <>
+            <Navbar/>
             <div style={{marginTop: 10}}>
                 <div className={"container"}>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -31,12 +34,13 @@ class InClass extends Component {
                             <Button variant="secondary" onClick={this.three}>People</Button>
                         </ButtonGroup>
                     </div>
-                    {this.state.page===1?<Stream classname="AP_7B" description="This is Ap class"/>:""}
+                    {this.state.page===1?<Stream classname="Programming" description="This is AP 8B Class."/>:""}
                     {this.state.page===2?<Classwork/>:""}
                     {this.state.page===3?<People/>:""}
 
                 </div>
             </div>
+            </>
         );
     }
 }

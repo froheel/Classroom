@@ -7,15 +7,12 @@ import ClassesPage from './pages/classes';
 import Joinclass from "./pages/Joinclass";
 import Todolist from "./pages/Todolist";
 import Createclass from "./pages/Createclass";
-import Sidebar from "./components/Sidebar/Sidebar";
 import InClass from "./husnain_components/InClass";
 import Assignment from "./pages/Assignment";
-
 
 function App() {
     return (
         <Router>
-            <Sidebar/>
             <Switch>
                 <Route path="/" component={Home} exact/>
                 <Route path="/signin" component={SignInPage} exact/>
