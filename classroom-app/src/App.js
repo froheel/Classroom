@@ -8,6 +8,7 @@ import Joinclass from "./pages/Joinclass";
 import Todolist from "./pages/Todolist";
 import Createclass from "./pages/Createclass";
 import InClass from "./husnain_components/InClass";
+import Assignment from "./pages/Assignment";
 
 function App() {
     return (
@@ -18,8 +19,7 @@ function App() {
                 <Route path="/signup" component={SignUpPage} exact/>
                 <Route path="/classes" component={ClassesPage} exact/>
                 <Route path="/inclass" component={InClass} exact/>
-                {/*todo Husnain*/}
-                {/*<Route path='/Assignment' exact component={Assignments}/>*/}
+                <Route path='/assignment' exact component={Assignment}/>
                 <Route path='/Joinclass' exact component={Joinclass}/>
                 <Route path='/Todolist' exact component={Todolist}/>
                 <Route path='/Createclass' exact component={Createclass}/>
