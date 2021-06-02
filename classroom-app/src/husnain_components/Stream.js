@@ -6,6 +6,7 @@ import AddInStream from "./AddInStream";
 import temp from "../images/temp.png";
 import {BsCameraVideo} from "react-icons/all";
 import {Link} from "react-router-dom";
+import Icon3 from '../../src/images/svg-5.svg';
 
 class Stream extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Stream extends React.Component {
 
     render() {
         return <div className={"container align-content-center"}>
-            <Jumbotron style={{marginTop: 20}}>
+            <Jumbotron style={{marginTop: 20, backgroundImage: `url(${Icon3})`, backgroundSize: 'cover'}}>
                 <h1>{this.props.classname}</h1>
                 <p><Link to={"https://meet.google.com/lookup/gpaem3ucmu?authuser=1&hs=179"}> Meet Link <BsCameraVideo
                     fontSize={"20px"} color={"black"}/> </Link>
@@ -43,7 +44,7 @@ class Stream extends React.Component {
                     </Card>
                 </div>
                 <div className={"col-md-9"}>
-                    <Button style={{width: "100%"}} onClick={this.collapse}>Add</Button>
+                    <Button style={{width: "100%", backgroundColor:' #5cb85c', borderColor:'transparent'}} onClick={this.collapse}>Add</Button>
                     <Collapse style={{marginTop: 10}} in={this.state.open}>
                         <div id="example-collapse-text">
                             <AddInStream/>
