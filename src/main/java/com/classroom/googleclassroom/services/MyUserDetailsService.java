@@ -1,4 +1,4 @@
-package com.classroom.googleclassroom;
+package com.classroom.googleclassroom.services;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

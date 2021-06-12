@@ -1,7 +1,7 @@
 package com.classroom.googleclassroom.filters;
 
-import com.classroom.googleclassroom.MyUserDetailsService;
-import com.classroom.googleclassroom.util.JwtUtil;
+import com.classroom.googleclassroom.services.MyUserDetailsService;
+import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

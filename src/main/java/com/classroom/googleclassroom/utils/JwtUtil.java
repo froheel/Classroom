@@ -1,4 +1,4 @@
-package com.classroom.googleclassroom.util;
+package com.classroom.googleclassroom.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
