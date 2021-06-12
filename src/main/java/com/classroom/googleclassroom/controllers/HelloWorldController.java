@@ -2,6 +2,7 @@ package com.classroom.googleclassroom.controllers;
 
 import com.classroom.googleclassroom.models.AuthenticationRequest;
 import com.classroom.googleclassroom.models.AuthenticationResponse;
+import com.classroom.googleclassroom.models.ErrorResponse;
 import com.classroom.googleclassroom.services.MyUserDetailsService;
 import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class HelloWorldController {
+public class HelloWorldController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,16 +40,15 @@ class HelloWorldController {
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+            return ResponseEntity.ok(new ErrorResponse("Login Failed"));
         }
-
-
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        try {
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            final String jwt = jwtTokenUtil.generateToken(userDetails);
+            return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ErrorResponse("Login Failed"));
+        }
     }
 
 }

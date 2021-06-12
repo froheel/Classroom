@@ -3,6 +3,7 @@ package com.classroom.googleclassroom;
 import com.classroom.googleclassroom.filters.JwtRequestFilter;
 import com.classroom.googleclassroom.models.AuthenticationRequest;
 import com.classroom.googleclassroom.models.AuthenticationResponse;
+import com.classroom.googleclassroom.models.ErrorResponse;
 import com.classroom.googleclassroom.services.MyUserDetailsService;
 import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
