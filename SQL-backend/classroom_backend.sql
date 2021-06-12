@@ -258,10 +258,176 @@ exec InsertPerson
 @gender = 'M',
 @profilepicture = 'ather.jpg',
 @bio = 'my name is fawzu',
-@userpassword = 'iamfawaz',
+@userpassword = 'iaamfawaz',
 @flag=@success OUTPUT 
 
 select @success
 
 
 select * from [Person]
+
+
+--- Procedure 2: Insert Class
+-- Each class name is unique
+go
+create procedure InsertClass
+@classId int,
+@classname varchar(30),
+@classcode varchar(10),
+@meetlink varchar(50),
+@invitelink varchar(50),
+@flag int OUTPUT --- 0: success , 1:len(@classname) <2 , 2: Classname already exists
+as
+begin
+set @flag=0
+declare @max int
+select @max=1
+
+	if( exists (select * from Class))
+	begin
+	select @max= max(classId)+1
+	from Class
+	end
+
+	if(len(@classname)<2)
+	begin
+	set @flag=1
+	return
+	end
+
+	if(exists(select * from Class where classname = @classname))
+	begin
+	set @flag=2
+	return
+	end
+
+	insert into [Class](classId, classname, classcode,meetlink, invitelink)
+	values(@max,@classname,@classcode,@meetlink,@invitelink)
+
+end
+
+declare @success int
+
+exec InsertClass
+@classId = '3',
+@classname = 'Advanced Programming',
+@classcode = '2hu2he',
+@meetlink = 'https://meetwhatever',
+@invitelink = 'htpps://joinwhatever',
+@flag=@success OUTPUT 
+
+select @success
+
+
+select * from [Class]
+
+--- Procedure 3: Class_Person ie enroll in class
+
+go
+create procedure Enroll
+@accountId int,
+@classId int ,
+@type1 char, 
+@flag int OUTPUT --- 0: success , 1:already enrolled in class, 2: accountId does not exist, 3: classId does not exist
+as
+begin
+set @flag=0
+
+	if( exists(select * from Enrolled where (accountId = @accountId and classId = @classId)))
+	begin
+	set @flag=1
+	return
+	end
+
+	if( not exists(select * from Person where accountId = @accountId))
+	begin
+	set @flag=2
+	return
+	end
+
+	if(not exists(select * from Class where classId = @classId))
+	begin
+	set @flag=3
+	return
+	end
+
+	insert into [Enrolled](accountId,classId,[type])
+	values(@accountId,@classId,@type1)
+end
+
+declare @success int
+exec Enroll
+@accountId = '4',
+@classId = '1',
+@type1 = 'S',
+@flag=@success OUTPUT 
+
+select @success
+
+
+select * from [Enrolled]
+
+
+--- Procedure 4: Insert Post
+
+go
+create procedure InsertPost
+@postId int,
+@accountId int,
+@classId int,
+@created datetime,
+@content varchar(200),
+@topic varchar(30),
+@typeofpost char,
+@flag int OUTPUT --- 0: success ,1: person not enrolled in class,  2 :assignment/resource by a student(can only create of N type) , 
+as
+begin
+set @flag=0
+declare @max int
+select @max=1
+
+	if( exists (select * from Post))
+	begin
+	select @max= max(postId)+1
+	from Post
+	end
+
+	if(not exists(select * from Enrolled where classId=@classId and accountId=@accountId))
+	begin
+	set @flag=1
+	return
+	end
+
+	if(@typeofpost = 'A' or @typeofpost='R')
+	begin
+
+	if (not exists(select * from Enrolled where classId=@classId and accountId=@accountId and [type]='T'))
+	begin
+	set @flag=2
+	return
+	end
+
+	end
+
+	
+
+	insert into [Post](postId,accountId,classId,created,content,topic,[type])
+	values(@max, @accountId,@classId, current_timestamp,@content,@topic,@typeofpost)
+end
+
+declare @success int
+exec InsertPost
+@postId = '3',
+@accountId = '4',
+@classId ='1',
+@created = '',
+@content = 'hello teacher!!!',
+@topic ='Welcome',
+@typeofpost='N',
+@flag=@success OUTPUT 
+
+select @success
+
+
+select * from [Post]
+select * from [Enrolled]
