@@ -122,7 +122,7 @@ create table Assignment
 	primary key(postId),
 	foreign key(postId) references Post(postId) on update cascade on delete cascade,
 
-	)
+	);
 
 	insert into Assignment(postId,deadline,marks,attachment)
 	values(2,current_timestamp, 100, 'Assign.pdf')
@@ -190,3 +190,78 @@ create table Assignment
 	drop table Mark
 	Select * from Mark
 
+---Procedures
+--- Procedure 1 : Insert Person
+go
+create procedure InsertPerson
+@accountId int,
+@dateofregister date,
+@name varchar(30),
+@email varchar(40),
+@dob date,
+@gender char,
+@profilepicture varchar (50),
+@bio varchar(100),
+@userpassword varchar(30),
+@flag int OUTPUT --- 0: success , 1:@dob >=date, 2 :gender !=M and not equal to F , 3:len of pass <6 , 4:email not unique in db
+as
+begin
+set @flag=0
+declare @max int
+select @max=1
+
+	if( exists (select * from [Person]))
+	begin
+	select @max= max(accountId)+1
+	from [Person]
+	end
+
+	if( @dob >= getdate())
+	begin
+	set @flag=1
+	return 
+	end
+
+	if(@gender!='M' and @gender!='F')
+	begin
+	set @flag=2
+	return
+	end
+
+	if(len(@userpassword)<6)
+	begin
+	set @flag=3
+	return
+	end
+
+	if(exists( select * from [Person] where email=@email))
+	begin
+	set @flag=4
+	return
+	end
+
+	insert into [Person](accountId, dateofregister, name, email, dob, gender, profilepicture, bio, [password])
+	values(@max,getdate(),@name,@email,@dob,@gender,@profilepicture,@bio,@userpassword)
+
+end
+
+
+
+declare @success int
+
+exec InsertPerson
+@accountId = '4',
+@dateofregister = '',
+@name = 'Ather Fawaz',
+@email ='ather@gmail.com',
+@dob = N'2000-01-12',
+@gender = 'M',
+@profilepicture = 'ather.jpg',
+@bio = 'my name is fawzu',
+@userpassword = 'iamfawaz',
+@flag=@success OUTPUT 
+
+select @success
+
+
+select * from [Person]
