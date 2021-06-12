@@ -1,8 +1,18 @@
 # Classroom
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Classroom is a platform where teachers and students are able to communicate effectively with each other. The main objective of Classroom is not only to maintain communication but also share resources with students and track their progress. Teachers can register on Classroom and create a new class to teach. A class code will be generated which can then be shared with students. Students can enroll in classes after registering as students and inserting the class code of the class. The teacher can create new posts and post them in the class. Students can comment on posts and share their opinions. An important feature of the classroom is organization of posts. Teachers can classify a particular post as either Resource or Assignment.  Moreover, the deadline for Assignment can also be selected by the teacher. Students can upload a pdf and submit before the deadline. The joined student list along with the teacher is also visible on the specific classroom. Once the class is no longer needed then it can be deleted by the teacher.
 
 React.js has been used to design the frontend. The design is responsive, pages are all linked together properly and the components are either customized or picked from material.ui & react-bootstrap libraries. The UI is demonstrated in the video link given below with dummy data.
-Video Link: https://www.youtube.com/watch?v=t76y425ZZ4o
+
+## Video Link
+https://www.youtube.com/watch?v=t76y425ZZ4o
+
+## Run Code
+```
+cd classroom-app
+npm start
+```
 
 # Getting Started with Create React App
 
