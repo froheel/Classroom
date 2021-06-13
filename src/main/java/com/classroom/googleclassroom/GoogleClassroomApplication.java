@@ -4,9 +4,11 @@ import com.classroom.googleclassroom.filters.JwtRequestFilter;
 import com.classroom.googleclassroom.models.AuthenticationRequest;
 import com.classroom.googleclassroom.models.AuthenticationResponse;
 import com.classroom.googleclassroom.models.ErrorResponse;
+import com.classroom.googleclassroom.services.FilesStorageService;
 import com.classroom.googleclassroom.services.MyUserDetailsService;
 import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,12 +31,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @SpringBootApplication
 public class GoogleClassroomApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GoogleClassroomApplication.class, args);
     }
+
 
 }
 

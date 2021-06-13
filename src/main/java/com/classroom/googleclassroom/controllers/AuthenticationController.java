@@ -32,8 +32,6 @@ public class AuthenticationController {
         //TODO add the data to database
 
 
-
-
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword())
             );
