@@ -163,7 +163,7 @@ create table Assignment
 
 	);
 
-	DROP table Submission
+	/*DROP table Submission*/
 
 	go
 	insert into Submission(accountId,postId,document,submissiontime)
@@ -187,14 +187,13 @@ create table Assignment
 	insert into Mark(postId,studentId,obtainedmarks,returned)
 	values(2,2,80,'Y')
 
-	drop table Mark
+	/*drop table Mark*/
 	Select * from Mark
 
 ---Procedures
 --- Procedure 1 : Insert Person
 go
 create procedure InsertPerson
-@accountId int,
 @dateofregister date,
 @name varchar(30),
 @email varchar(40),
@@ -265,13 +264,12 @@ select @success
 
 
 select * from [Person]
-
-
 --- Procedure 2: Insert Class
 -- Each class name is unique
+
+
 go
 create procedure InsertClass
-@classId int,
 @classname varchar(30),
 @classcode varchar(10),
 @meetlink varchar(50),
@@ -320,8 +318,8 @@ select @success
 
 
 select * from [Class]
-
 --- Procedure 3: Class_Person ie enroll in class
+
 
 go
 create procedure Enroll
@@ -370,6 +368,7 @@ select * from [Enrolled]
 
 --- Procedure 4: Insert Post
 
+
 go
 create procedure InsertPost
 @postId int,
@@ -386,10 +385,9 @@ set @flag=0
 declare @max int
 select @max=1
 
-	if( exists (select * from Post))
+	if( exists (select postId from Post))
 	begin
-	select @max= max(postId)+1
-	from Post
+	select @max= max(postId)+1 from Post
 	end
 
 	if(not exists(select * from Enrolled where classId=@classId and accountId=@accountId))
@@ -402,15 +400,12 @@ select @max=1
 	begin
 
 	if (not exists(select * from Enrolled where classId=@classId and accountId=@accountId and [type]='T'))
-	begin
-	set @flag=2
-	return
+		begin
+		set @flag=2
+		return
+		end
 	end
-
-	end
-
 	
-
 	insert into [Post](postId,accountId,classId,created,content,topic,[type])
 	values(@max, @accountId,@classId, current_timestamp,@content,@topic,@typeofpost)
 end
@@ -428,6 +423,271 @@ exec InsertPost
 
 select @success
 
-
+select * from [Person]
+select * from [Class]
+select * from [Assignment]
 select * from [Post]
 select * from [Enrolled]
+
+
+go
+create procedure GetPersonProfile @email varchar(40)
+as
+begin
+	select accountId, Person.name, email, dob, gender, profilepicture, bio from Person where email = @email
+end
+
+exec GetPersonProfile @email = 'feza22@gmail.com';
+
+
+
+
+go
+create procedure GetPersonCredentials @email varchar(40)
+as
+begin
+	select email, password from Person where email = @email
+end
+
+exec GetPersonCredentials @email = 'feza22@gmail.com';
+go
+create procedure GetClassPosts @classId int
+as
+begin
+	select * from Post where classId = @classId
+end
+
+
+exec GetClassPosts @classId = 1;
+
+go
+create procedure GetEnrolled @classId int
+as
+begin
+	select name from Person where accountId in (select accountId from Enrolled where classId = @classId and type = 'S')
+end
+
+exec GetEnrolled @classId = 1;
+
+go
+create procedure GetClassTeachers @classId int
+as
+begin
+	select name from Person where accountId in (select accountId from Enrolled where classId = @classId and type = 'T')
+end
+
+
+go
+create procedure isTeacher @classId int, @email varchar(40), @enrollment int output --- 0 = teacher, 1 = student, 2 = not enrolled
+as
+begin
+declare @et char(1)
+	select @et = Enrolled.type from Enrolled where classId = @classId and accountId = (select accountId from Person where email = @email)
+	if @et = 'T'
+		begin
+		set @enrollment = 0
+		return
+		end
+	else if @et = 'S'
+		begin
+		set @enrollment = 1
+		return
+		end
+	else
+		begin
+		set @enrollment = 2
+		return
+		end
+end
+go
+create procedure GetClassAssignments @classId int
+as
+begin
+	select A.postId, A.deadline, A.marks, A.attachment, P.created, P.content
+	from Assignment as A INNER JOIN Post as P on A.postId = P.postId where classId = @classId
+end
+
+exec GetClassAssignments @classId = 1;
+select * from Post
+go
+create procedure GetStudentClasses @email varchar(40)
+as
+begin
+	Select *
+	from Class
+	where classId in (select classId
+					from Enrolled
+					where accountId = (select accountId from Person where email = @email ))
+end
+
+exec GetStudentClasses @email = 'muj@gmail.com';
+select * from Enrolled
+select * from Person
+
+go 
+create procedure GetClassCode @classId int
+as
+begin
+	select classcode from Class where classId = @classId
+end
+exec GetClassCode @classId = 1;
+go
+create procedure InsertMarks @accountId int, @postId int, @marks int
+as
+begin
+	UPDATE Mark
+	SET obtainedmarks = @marks
+	WHERE postId = @postId and studentId = @accountId
+end
+go
+create procedure GetStudentMarks @accountId int, @postId int
+as
+begin
+	select obtainedmarks from Mark where studentId = @accountId and postId = @postId
+end
+
+go
+create procedure GetClassResources	@classId int
+as
+begin
+	select * from Resource where postId in (select postId from Post where classId = @classId)
+end
+
+
+go
+create procedure InsertAssignment @accountId int, @classId int, @content varchar(200), @topic varchar(30), @type char(1), @deadline datetime, @marks int, @attachment varchar(50)
+as
+begin
+declare @max int
+select @max=1
+
+	if( exists (select postId from Post))
+	begin
+	select @max= max(postId)+1 from Post
+	end
+
+	insert into [Post](postId,accountId,classId,created,content,topic,[type])
+	values(@max, @accountId,@classId, current_timestamp,@content,@topic,@type)
+
+	insert into [Assignment](postId,deadline,marks,attachment)
+	values(@max, @deadline,@marks, @attachment)
+end
+go
+create procedure InsertResource @accountId int, @classId int, @content varchar(200), @topic varchar(30), @type char(1), @attachment varchar(50)
+as
+begin
+declare @max int
+select @max=1
+
+	if( exists (select postId from Post))
+	begin
+	select @max= max(postId)+1 from Post
+	end
+
+	insert into [Post](postId,accountId,classId,created,content,topic,[type])
+	values(@max, @accountId,@classId, current_timestamp,@content,@topic,@type)
+
+	insert into [Resource](postId,attachment)
+	values(@max, @attachment)
+end
+go
+create procedure SubmitAssignment @accountId int, @postId int, @document varchar(200)
+as
+begin
+	insert into [Submission](accountId, postId, document, submissiontime)
+	values(@accountId, @postId, @document, CURRENT_TIMESTAMP)
+end
+go
+create procedure GetSubmissions @postId int
+as
+begin
+	select * from Submission where postId = @postId
+end
+
+go
+create procedure InsertComment @postId int, @accountId int, @content varchar(50), @time datetime
+as
+begin
+declare @max int
+select @max=1
+
+	if( exists (select commentId from Comments))
+	begin
+	select @max= max(commentId)+1 from Comments
+	end
+
+	insert into [Comments](postId, accountId, commentId, content, [time])
+	values(@accountId, @postId, @max, @content, @time)
+end
+go
+create procedure GetPostComments @postId int
+as
+begin
+	select * from Comments where postId = @postId
+end
+
+go
+create procedure GetNoDueDateAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select * from Assignment where deadline IS NULL and postId in (select postId from Post where classId = @classId) and postId not in (select postId from Submission where accountId = @accountId)
+end
+go
+create procedure GetThisWeekAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select *
+	from Assignment
+	where postId in (select postId from Post where classId = @classId) and DATEDIFF(Day, CURRENT_TIMESTAMP, deadline) between 0 and 7 and postId not in (select postId from Submission where accountId = @accountId)
+
+end
+
+go
+create procedure GetNextWeekAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select *
+	from Assignment
+	where postId in (select postId from Post where classId = @classId) and DATEDIFF(Day, CURRENT_TIMESTAMP, deadline) between 8 and 14 and postId not in (select postId from Submission where accountId = @accountId)
+
+end
+
+go
+create procedure GetLaterAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select *
+	from Assignment
+	where postId in (select postId from Post where classId = @classId) and DATEDIFF(Day, CURRENT_TIMESTAMP, deadline) >14 and postId not in (select postId from Submission where accountId = @accountId)
+end
+
+
+go
+create procedure GetMissingAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select *
+	from Assignment
+	where postId in (select postId from Post where classId = @classId) and DATEDIFF(Day, CURRENT_TIMESTAMP, deadline) < 0 and postId not in (select postId from Submission where accountId = @accountId)
+end
+
+go
+create procedure GetDoneAssignments @email varchar(40), @classId int
+as
+begin
+	declare @accountId int
+	select @accountId = accountId from Person where email = @email
+	select *
+	from Assignment
+	where postId in (select postId from Post where classId = @classId) and postId in (select postId from Submission where accountId = @accountId)
+end
