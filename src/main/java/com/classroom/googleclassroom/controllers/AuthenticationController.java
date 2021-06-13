@@ -3,6 +3,7 @@ package com.classroom.googleclassroom.controllers;
 import com.classroom.googleclassroom.models.AuthenticationRequest;
 import com.classroom.googleclassroom.models.AuthenticationResponse;
 import com.classroom.googleclassroom.models.ErrorResponse;
+import com.classroom.googleclassroom.models.SignUpRequest;
 import com.classroom.googleclassroom.services.MyUserDetailsService;
 import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,23 @@ public class AuthenticationController {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
-    @RequestMapping({"/hello"})
-    public String firstPage() {
-        return "Hello World";
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ResponseEntity<?> signUp(@RequestBody SignUpRequest signUpRequest) {
+        //TODO add the data to database
+
+
+
+
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword())
+            );
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.ok(new ErrorResponse("Login Failed"));
+        }
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(signUpRequest.getUsername());
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+//            TODO: need the role from db
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, "role"));
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
