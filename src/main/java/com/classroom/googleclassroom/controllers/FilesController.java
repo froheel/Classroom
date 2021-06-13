@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.classroom.googleclassroom.models.FileInfo;
-import com.classroom.googleclassroom.models.ResponseMessage;
+import com.classroom.googleclassroom.Responses.ResponseMessage;
 import com.classroom.googleclassroom.services.FilesStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;

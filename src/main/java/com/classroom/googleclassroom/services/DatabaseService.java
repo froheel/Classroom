@@ -1,6 +1,10 @@
 package com.classroom.googleclassroom.services;
 
+import com.classroom.googleclassroom.models.GoogleClass;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseService {
 
@@ -39,4 +43,27 @@ public class DatabaseService {
         }
     }
 
+    public static List<GoogleClass> getClassesOnEmail(String email) {
+        List<GoogleClass> classes = new ArrayList<>();
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL);
+            Statement stmt = conn.createStatement();
+//            TODO needed to add procedure
+            String query = String.format("select * from class");
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                classes.add(new GoogleClass(rs.getString("classid"),
+                        rs.getString("classname"),
+                        rs.getString("classcode"),
+                        rs.getString("meetlink"),
+                        rs.getString("invitelink")));
+            }
+            conn.close();
+            return classes;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

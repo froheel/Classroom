@@ -20,6 +20,16 @@ public class JwtUtil {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public String extractUsernameHeader(String token) {
+        try {
+            token = token.replace("Bearer ", "");
+            return extractClaim(token, Claims::getSubject);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
@@ -28,6 +38,7 @@ public class JwtUtil {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }

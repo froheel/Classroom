@@ -1,4 +1,4 @@
-package com.classroom.googleclassroom.models;
+package com.classroom.googleclassroom.Responses;
 
 
 

@@ -1,9 +1,10 @@
 package com.classroom.googleclassroom.controllers;
 
-import com.classroom.googleclassroom.models.AuthenticationRequest;
-import com.classroom.googleclassroom.models.AuthenticationResponse;
-import com.classroom.googleclassroom.models.ErrorResponse;
-import com.classroom.googleclassroom.models.SignUpRequest;
+import com.classroom.googleclassroom.Requests.AuthenticationRequest;
+import com.classroom.googleclassroom.Responses.AuthenticationResponse;
+import com.classroom.googleclassroom.Responses.ErrorResponse;
+import com.classroom.googleclassroom.Requests.SignUpRequest;
+import com.classroom.googleclassroom.services.DatabaseService;
 import com.classroom.googleclassroom.services.MyUserDetailsService;
 import com.classroom.googleclassroom.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,9 @@ public class AuthenticationController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> signUp(@RequestBody SignUpRequest signUpRequest) {
         //TODO add the data to database
-
-
+        if(!DatabaseService.SignUp(signUpRequest.getUsername(),signUpRequest.getPassword())){
+            return ResponseEntity.ok(new ErrorResponse("Data Entry Failed"));
+        }
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword())
             );
@@ -40,8 +42,7 @@ public class AuthenticationController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(signUpRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-//            TODO: need the role from db
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, "role"));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -54,8 +55,7 @@ public class AuthenticationController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-//            TODO: need the role from db
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, "role"));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
 }
