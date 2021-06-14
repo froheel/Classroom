@@ -323,21 +323,22 @@ select * from [Class]
 
 go
 create procedure Enroll
-@accountId int,
+@email varchar(40),
 @classId int ,
 @type1 char, 
 @flag int OUTPUT --- 0: success , 1:already enrolled in class, 2: accountId does not exist, 3: classId does not exist
 as
 begin
+declare @accID int
 set @flag=0
 
-	if( exists(select * from Enrolled where (accountId = @accountId and classId = @classId)))
+	if( exists(select * from Enrolled where classId = @classId and accountId = (select accountId from Person where email = @email))
 	begin
 	set @flag=1
 	return
 	end
 
-	if( not exists(select * from Person where accountId = @accountId))
+	if( not exists(select * from Person where email = @email))
 	begin
 	set @flag=2
 	return
@@ -348,9 +349,9 @@ set @flag=0
 	set @flag=3
 	return
 	end
-
+	select @accID = accountId from Person where email = @email
 	insert into [Enrolled](accountId,classId,[type])
-	values(@accountId,@classId,@type1)
+	values(@accID,@classId,@type1)
 end
 
 declare @success int
