@@ -332,7 +332,7 @@ begin
 declare @accID int
 set @flag=0
 
-	if( exists(select * from Enrolled where classId = @classId and accountId = (select accountId from Person where email = @email))
+	if( exists(select * from Enrolled where classId = @classId and accountId = (select accountId from Person where email = @email)))
 	begin
 	set @flag=1
 	return
