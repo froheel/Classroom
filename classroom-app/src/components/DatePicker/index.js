@@ -13,7 +13,7 @@ class BootstrapDate extends React.Component{
             <div>
                 <div className="row">
                         <Form.Group controlId="dob">
-                            <FormLabel>Select Date</FormLabel>
+                            <FormLabel>Select Birth Date</FormLabel>
                             <DateBg><Form.Control type="date" name="dob" placeholder="Date of Birth" max={new Date().toISOString().split("T")[0]} required />
                             <Form.Check
                                 type="checkbox" label="Register As a Teacher"/>
