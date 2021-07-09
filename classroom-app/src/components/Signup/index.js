@@ -2,6 +2,8 @@ import React from 'react'
 import { Container, Form, FormButton, FormContent, FormH1, FormInput, FormLabel, FormWrap, Icon, Text,VideoBg } from './SignupElements'
 import Video from '../../videos/video-1.mp4';
 import '../InfoSection/Button.css';
+import '../DatePicker/index';
+import BootstrapDate from '../DatePicker/index';
 
 const SignUp = () => {
     return (
@@ -20,6 +22,7 @@ const SignUp = () => {
                             <FormInput type='password' required/>
                             <FormLabel htmlFor='for'>Re-Enter Password</FormLabel>
                             <FormInput type='password' required/>
+                            <BootstrapDate></BootstrapDate>
                             <FormButton type ='submit'>Sign Up</FormButton>
                             <Text>Get Started Today!</Text>
                         </Form>
