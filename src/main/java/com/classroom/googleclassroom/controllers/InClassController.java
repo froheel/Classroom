@@ -12,17 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class ClassesController {
+public class InClassController {
+
     @Autowired
     private JwtUtil jwtTokenUtil;
 
-    @PostMapping("/getclasses")
-    public ResponseEntity<?> Classes(@RequestHeader("Authorization") String jwt) {
+    @PostMapping("/inclass/:id")
+    public ResponseEntity<?> Classes(@RequestHeader("Authorization") String jwt, @PathParam("id") int id) {
         String email = jwtTokenUtil.extractUsernameHeader(jwt);
+        if (email == null) {
+            return ResponseEntity.ok(new ErrorResponse("UnAuthorized Class Access"));
+        }
         List<GoogleClass> classList = DatabaseService.getClassesOnEmail(email);
         if (classList == null) {
             return ResponseEntity.ok(new ErrorResponse("Unable To Fetch Classes"));
@@ -30,14 +35,5 @@ public class ClassesController {
         return ResponseEntity.ok(new GetClassResponse(classList));
     }
 
-    @PostMapping("/enroll")
-    public ResponseEntity<?> Enroll(@RequestBody EnrollRequest enrollRequest, @RequestHeader("Authorization") String jwt) {
-        String email = jwtTokenUtil.extractUsernameHeader(jwt);
-        int r = DatabaseService.enrollClass(email, enrollRequest.getClasscode(), enrollRequest.getType());
-        if (r == -1) {
-            return ResponseEntity.ok(new ErrorResponse("Already in the class"));
-        }
-        return ResponseEntity.ok(new EnrollResponse(r));
-    }
 
 }

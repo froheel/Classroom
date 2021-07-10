@@ -8,13 +8,23 @@ public class GoogleClass implements Serializable {
     private String classcode;
     private String meetlink;
     private String invitelink;
+    private String teachername;
 
-    public GoogleClass(String classid, String classname, String classcode, String meetlink, String invitelink) {
+    public GoogleClass(String classid, String classname, String classcode, String meetlink, String invitelink, String teachername) {
         this.classid = classid;
         this.classname = classname;
         this.classcode = classcode;
         this.meetlink = meetlink;
         this.invitelink = invitelink;
+        this.teachername = teachername;
+    }
+
+    public String getTeachername() {
+        return teachername;
+    }
+
+    public void setTeachername(String teachername) {
+        this.teachername = teachername;
     }
 
     public String getClassid() {

@@ -1,4 +1,4 @@
-package com.classroom.googleclassroom.Responses;
+package com.classroom.googleclassroom.dtos.Responses;
 
 import com.classroom.googleclassroom.models.GoogleClass;
 

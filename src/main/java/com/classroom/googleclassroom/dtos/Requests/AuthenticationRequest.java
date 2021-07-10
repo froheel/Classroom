@@ -1,4 +1,4 @@
-package com.classroom.googleclassroom.Requests;
+package com.classroom.googleclassroom.dtos.Requests;
 
 import java.io.Serializable;
 

@@ -8,8 +8,7 @@ import java.util.List;
 
 public class DatabaseService {
 
-    static final String DB_URL = "jdbc:sqlserver://35.247.185.25:1433;databaseName=classroom;user=root;password=pin7766@;";
-
+    static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=classroom;user=sa;password=the_strong_password1";
 
     public static String Login(String username) {
         try {
@@ -43,21 +42,42 @@ public class DatabaseService {
         }
     }
 
+    public static int enrollClass(String email, String classCode, String type) {
+        try {
+
+            Connection conn = DriverManager.getConnection(DB_URL);
+            CallableStatement cs = conn.prepareCall("{call Enroll (?,?,?,?)}");
+            cs.setString(1, email);
+            cs.setString(2, classCode);
+            cs.setString(3, type);
+            cs.registerOutParameter(4, Types.INTEGER);
+            cs.execute();
+            int r = cs.getInt(4);
+            conn.close();
+            return r;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
+
     public static List<GoogleClass> getClassesOnEmail(String email) {
         List<GoogleClass> classes = new ArrayList<>();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL);
-            Statement stmt = conn.createStatement();
-//            TODO needed to add procedure
-            String query = String.format("select * from class");
-            ResultSet rs = stmt.executeQuery(query);
+            CallableStatement cs = conn.prepareCall("{call GetStudentClasses(?)}");
+            cs.setString(1, email);
+            cs.execute();
+            //TODO UPDATE THE TEACHERNAME FROM THE DATABASE
+            ResultSet rs = cs.executeQuery();
             while (rs.next()) {
                 classes.add(new GoogleClass(rs.getString("classid"),
                         rs.getString("classname"),
                         rs.getString("classcode"),
                         rs.getString("meetlink"),
-                        rs.getString("invitelink")));
+                        rs.getString("invitelink"), "UNKNOWN"));
             }
             conn.close();
             return classes;
