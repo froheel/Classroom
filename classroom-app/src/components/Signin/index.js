@@ -15,13 +15,17 @@ import axios from "axios"
 import Video from '../../videos/video-1.mp4';
 import '../InfoSection/Button.css';
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 class SignIn extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             username: null,
-            password: null
+            password: null,
+            success: false,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,28 +37,28 @@ class SignIn extends Component {
         this.setState({[nam]: val});
     }
 
+
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state)
-        axios.post('http://localhost:8080/authenticate', {
-            username: this.state.username,
-            password: this.state.password
-        },).then(function (response) {
-            console.log(response);
-            if (response.data.error) {
-                // Todo: Display to ui
-                console.log(response.data.error);
-            } else if (response.data.jwt) {
-                // Todo: Save this token to state for further process
-                console.log("The JWT is" + response.data.jwt);
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
+        this.signIn()
+        this.props.pill()
     }
 
+    async signIn() {
+        const res = await axios.post('http://localhost:8080/authenticate', {
+            username: this.state.username,
+            password: this.state.password
+        },);
+        if (!res.data.error) {
+            await this.props.signIn(res.data.jwt, res.data.email, res.data.img);
+        }
+    }
 
     render() {
+
+        if (this.props.auth) {
+            return (<Redirect to="/classes"/>)
+        }
         return (
             <>
                 <VideoBg autoPlay loop muted src={Video} type='video/mp4'>
@@ -75,10 +79,23 @@ class SignIn extends Component {
                         </FormContent>
                     </FormWrap>
                 </Container>
-
             </>
         )
     }
+
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signIn: (jwt, name, email, img) => (dispatch({type: "SIGN_IN", payload: {name, jwt, email, img}})),
+        pill: () => (dispatch({type: "PILL"}))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

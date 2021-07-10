@@ -22,7 +22,7 @@ class Stream extends React.Component {
         return <div className={"container align-content-center"}>
             <Jumbotron style={{marginTop: 20, backgroundImage: `url(${Icon3})`, backgroundSize: 'cover'}}>
                 <h1>{this.props.classname}</h1>
-                <p><Link to={"https://meet.google.com/lookup/gpaem3ucmu?authuser=1&hs=179"}> Meet Link <BsCameraVideo
+                <p><Link to={this.props.meet?this.props.meet:""}> Meet Link <BsCameraVideo
                     fontSize={"20px"} color={"black"}/> </Link>
                 </p>
                 <h5>Description</h5>
@@ -50,9 +50,7 @@ class Stream extends React.Component {
                             <AddInStream/>
                         </div>
                     </Collapse>
-                    <StreamCard title="Assignment 1" description="Updated Marks On Flex"/>
-                    <StreamCard title="Assignment 2" description="Updated Marks On Flex"/>
-                    <StreamCard title="Assignment 3" description="Updated Marks On Flex"/>
+                    {this.props.posts.map(post=>(<StreamCard classid={this.props.classid} post = {post}/>))}
                 </div>
             </div>
         </div>;
