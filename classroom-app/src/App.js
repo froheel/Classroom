@@ -9,6 +9,7 @@ import Todolist from "./pages/Todolist";
 import Createclass from "./pages/Createclass";
 import InClass from "./husnain_components/InClass";
 import Assignment from "./pages/Assignment";
+import Marks from "./pages/Marks"
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path='/Joinclass' exact component={Joinclass}/>
                 <Route path='/Todolist' exact component={Todolist}/>
                 <Route path='/Createclass' exact component={Createclass}/>
+                <Route path= '/Marks' exact component = {Marks}/>
 
             </Switch>
         </Router>
